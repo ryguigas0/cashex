@@ -1,0 +1,24 @@
+defmodule Cashex.Rule do
+  use Ecto.Schema
+  import Ecto.Changeset
+
+  @primary_key {:id, :binary_id, autogenerate: true}
+  @foreign_key_type :binary_id
+
+  schema "rules" do
+    field :bon, :float
+    field :desc, :string
+
+    belongs_to :purchase, Cashex.Purchase
+    timestamps()
+  end
+
+  @doc false
+  def changeset(rule, attrs) do
+    rule
+    |> cast(attrs, [:desc, :bon])
+    |> validate_required([:desc, :bon])
+    |> validate_number(:bon, greater_than: 0, less_than: 100)
+    |> validate_length(:desc, max: 128)
+  end
+end
