@@ -7,8 +7,6 @@ defmodule CashexWeb.Router do
 
   scope "/api", CashexWeb do
     pipe_through :api
-
-    get "/hello/:name", HelloController, :hello
   end
 
   # Enables LiveDashboard only for development

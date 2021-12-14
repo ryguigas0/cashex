@@ -1,4 +1,7 @@
 defmodule Cashex.Rule do
+  @moduledoc """
+  Rule data model
+  """
   use Ecto.Schema
   import Ecto.Changeset
 

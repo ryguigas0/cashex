@@ -1,6 +1,13 @@
 defmodule Cashex.Rules.Read do
-  alias Cashex.{Rule, Repo}
+  @moduledoc """
+  Rule reading related functions
+  """
 
+  alias Cashex.{Repo, Rule}
+
+  @doc """
+  Finds an Rule from an id (uuid)
+  """
   def call(rule_id) do
     Repo.one(Rule, id: rule_id)
   end

@@ -1,4 +1,8 @@
 defmodule Cashex.Buyer do
+  @moduledoc """
+  Buyer data model
+  """
+
   use Ecto.Schema
   import Ecto.Changeset
 
