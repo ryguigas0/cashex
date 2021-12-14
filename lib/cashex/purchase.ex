@@ -11,7 +11,6 @@ defmodule Cashex.Purchase do
     field :value, :float
     field :buyer_cpf, :string
 
-    has_one :rule, Cashex.Rule, foreign_key: :id
     timestamps()
   end
 

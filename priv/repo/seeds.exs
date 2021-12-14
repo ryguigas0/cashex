@@ -10,14 +10,19 @@
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
 
+alias Cashex.{Purchases, Rules}
+
 # Create an Rule
-rule =
-  %Cashex.Rule{desc: "Gamers discount on walmart", bon: 2.05}
-  |> Cashex.Rule.changeset(%{})
-  |> Cashex.Repo.insert!()
+{:ok, rule} = Rules.Create.call(%{desc: "Gamers dicount", bon: 22.5})
+
+rule_id =
+  rule
+  |> Map.get(:id)
+  |> IO.inspect(label: "Test rule id")
 
 # Create an Purchase
-purchase =
-  %Cashex.Purchase{value: 59.99, rule: rule, buyer_cpf: "12345678912"}
-  |> Cashex.Purchase.changeset(%{})
-  |> Cashex.Repo.insert!()
+{:ok, purchase} = Purchases.Create.call(%{value: 59.99, buyer_cpf: "12345678912"}, rule_id)
+
+purchase
+|> Map.get(:id)
+|> IO.inspect(label: "Test purchase id")

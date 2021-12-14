@@ -9,7 +9,6 @@ defmodule Cashex.Rule do
     field :bon, :float
     field :desc, :string
 
-    belongs_to :purchase, Cashex.Purchase
     timestamps()
   end
 
