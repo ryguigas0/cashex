@@ -4,7 +4,6 @@ defmodule CashexWeb.HelloController do
   alias CashexWeb.HelloView
 
   def hello(conn, params) do
-    IO.inspect("STAGE 1 OK")
     name = Map.get(params, "name", "visitor")
 
     conn
