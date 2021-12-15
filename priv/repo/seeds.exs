@@ -21,7 +21,7 @@ rule_id =
   |> IO.inspect(label: "Test rule id")
 
 # Create an Purchase
-{:ok, purchase} = Purchases.Create.call(%{value: 59.99, buyer_cpf: "12345678912"}, rule_id)
+{:ok, purchase} = Purchases.Create.call(59.99, "12345678912", rule_id)
 
 purchase
 |> Map.get(:id)

@@ -11,7 +11,7 @@ defmodule Cashex.Buyers.UpdateCashback do
 
   defp find_buyer(cpf) do
     # Finds an buyer with the cpf
-    Repo.get_by(Buyer, cpf: cpf)
+    Buyers.Read.call(cpf)
     |> handle_buyer(cpf)
   end
 
