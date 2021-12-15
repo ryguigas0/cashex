@@ -7,6 +7,6 @@ defmodule Cashex.Users.Read do
 
   # Finds an single user with an cpf
   def call(cpf) do
-    Repo.one(User, cpf: cpf)
+    Repo.get_by(User, cpf: cpf)
   end
 end
