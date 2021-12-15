@@ -51,4 +51,17 @@ defmodule CashexWeb.RuleController do
       |> render("delete.json", id: rule_id)
     end
   end
+
+  def search(conn, params) do
+
+    result =
+      Map.get(params, "desc", "")
+      |> Rules.SerchByDesc.call()
+
+    with true <- length(result) != 0 do
+      conn
+      |> put_status(:found)
+      |> render("show_many.json", rule_list: result)
+    end
+  end
 end
