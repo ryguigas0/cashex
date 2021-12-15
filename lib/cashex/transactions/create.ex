@@ -2,12 +2,12 @@ defmodule Cashex.Transactions.Create do
   @moduledoc """
   Transaction creation related functions
   """
-  alias Cashex.{Transaction, Repo, Rules, Buyers}
+  alias Cashex.{Buyers, Repo, Rules, Transaction}
 
   @doc """
-  Creates an transaction from a value and a buyer_cpf
+  Creates an transaction from a value, an buyer_cpf and a rule_id
   """
-  def call(value, buyer_cpf, rule_id) do
+  def call(%{value: value, buyer_cpf: buyer_cpf, rule_id: rule_id}) do
     get_cashback(rule_id, value)
     |> handle_transaction(value, buyer_cpf)
   end

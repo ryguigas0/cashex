@@ -35,7 +35,8 @@ rule_c_id =
   |> IO.inspect(label: "Test rule_c id")
 
 # Create an Transaction for reciveing cashback
-{:ok, transaction_pos} = Transactions.Create.call(59.99, "12345678912", rule_a_id)
+{:ok, transaction_pos} =
+  Transactions.Create.call(%{value: 59.99, buyer_cpf: "12345678912", rule_id: rule_a_id})
 
 transaction_pos
 |> Map.get(:id)
@@ -49,7 +50,7 @@ rule_spend =
   |> Map.get(:id)
   |> IO.inspect(label: "SPENDING CASHBACK RULE")
 
-{:ok, transaction_neg} = Transactions.Create.call(-10.0, "12345678912", rule_spend)
+{:ok, transaction_neg} = Transactions.Create.call(%{value: -10, buyer_cpf: "12345678912", rule_id: rule_spend})
 
 transaction_neg
 |> Map.get(:id)

@@ -8,10 +8,11 @@ defmodule CashexWeb.Router do
   scope "/api", CashexWeb do
     pipe_through :api
 
+    get "/rule/search", RuleController, :search
     resources "/rule", RuleController, only: [:show, :create, :delete, :update]
-    get "/rule/searchdesc", RuleController, :search
 
-    # resources "/transaction", TransactionController, only: [:show, :create]
+    get "/transaction/history/:cpf", TransactionController, :history
+    resources "/transaction", TransactionController, only: [:show, :create]
 
     # get "/buyer/:id", BuyerController, :show
     # get "/buyer/spend", BuyerController, :spend

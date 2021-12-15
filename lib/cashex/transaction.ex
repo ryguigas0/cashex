@@ -3,13 +3,15 @@ defmodule Cashex.Transaction do
   Transaction data model
   """
 
-
   use Ecto.Schema
   import Ecto.Changeset
 
   @primary_key {:id, :binary_id, autogenerate: true}
 
-  @cast_attrs [:value, :buyer_cpf]
+  @fields [:value, :buyer_cpf, :cashback]
+
+  # What to render in json
+  @derive {Jason.Encoder, only: [:id] ++ @fields}
 
   schema "transactions" do
     field :cashback, :float
@@ -22,8 +24,8 @@ defmodule Cashex.Transaction do
   @doc false
   def changeset(transaction, attrs) do
     transaction
-    |> cast(attrs, @cast_attrs)
-    |> validate_required(@cast_attrs)
+    |> cast(attrs, @fields)
+    |> validate_required(@fields)
     |> validate_length(:buyer_cpf, is: 11)
     # Negative -> Spending cashback
     # Positive -> Recieving cashback
