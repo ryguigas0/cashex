@@ -7,7 +7,7 @@ defmodule CashexWeb.TransactionController do
     attrs =
       %{}
       |> Map.put(:value, params["value"])
-      |> Map.put(:buyer_cpf, params["buyer_cpf"])
+      |> Map.put(:user_cpf, params["user_cpf"])
       |> Map.put(:rule_id, params["rule_id"])
 
     with {:ok, new_transaction} <- Transactions.Create.call(attrs) do
@@ -29,9 +29,9 @@ defmodule CashexWeb.TransactionController do
   end
 
   def history(conn, params) do
-    with buyer_cpf <- params["cpf"],
-         false <- is_nil(buyer_cpf),
-         history <- Transactions.History.call(buyer_cpf),
+    with user_cpf <- params["cpf"],
+         false <- is_nil(user_cpf),
+         history <- Transactions.History.call(user_cpf),
          true <- length(history) != 0 do
       conn
       |> put_status(:found)

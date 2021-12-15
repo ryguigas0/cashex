@@ -1,6 +1,6 @@
-defmodule Cashex.Buyer do
+defmodule Cashex.User do
   @moduledoc """
-  Buyer data model
+  User data model
   """
 
   use Ecto.Schema
@@ -10,15 +10,15 @@ defmodule Cashex.Buyer do
 
   @required_params [:cashback_acc, :cpf]
 
-  schema "buyers" do
+  schema "users" do
     field :cashback_acc, :float, default: 0.0
 
     timestamps()
   end
 
   @doc false
-  def changeset(buyer, attrs) do
-    buyer
+  def changeset(user, attrs) do
+    user
     |> cast(attrs, @required_params)
     |> validate_required(@required_params)
     |> validate_length(:cpf, is: 11)

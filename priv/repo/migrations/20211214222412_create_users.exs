@@ -1,8 +1,8 @@
-defmodule Cashex.Repo.Migrations.CreateBuyers do
+defmodule Cashex.Repo.Migrations.CreateUsers do
   use Ecto.Migration
 
   def change do
-    create table(:buyers, primary_key: false) do
+    create table(:users, primary_key: false) do
       add :cpf, :string, primary_key: true
       add :cashback_acc, :float
 

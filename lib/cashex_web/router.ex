@@ -14,8 +14,8 @@ defmodule CashexWeb.Router do
     get "/transaction/history/:cpf", TransactionController, :history
     resources "/transaction", TransactionController, only: [:show, :create]
 
-    # get "/buyer/:id", BuyerController, :show
-    # get "/buyer/spend", BuyerController, :spend
+    # get "/user/:id", UserController, :show
+    # get "/user/spend", UserController, :spend
   end
 
   # Enables LiveDashboard only for development
