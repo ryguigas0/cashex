@@ -1,8 +1,8 @@
-defmodule Cashex.Repo.Migrations.CreatePurchases do
+defmodule Cashex.Repo.Migrations.CreateTransactions do
   use Ecto.Migration
 
   def change do
-    create table(:purchases, primary_key: false) do
+    create table(:transactions, primary_key: false) do
       add :id, :binary_id, primary_key: true
       add :cashback, :float
       add :value, :float

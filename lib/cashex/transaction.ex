@@ -1,6 +1,6 @@
-defmodule Cashex.Purchase do
+defmodule Cashex.Transaction do
   @moduledoc """
-  Purchase data model
+  Transaction data model
   """
 
 
@@ -11,7 +11,7 @@ defmodule Cashex.Purchase do
 
   @cast_attrs [:value, :buyer_cpf]
 
-  schema "purchases" do
+  schema "transactions" do
     field :cashback, :float
     field :value, :float
     field :buyer_cpf, :string
@@ -20,11 +20,13 @@ defmodule Cashex.Purchase do
   end
 
   @doc false
-  def changeset(purchase, attrs) do
-    purchase
+  def changeset(transaction, attrs) do
+    transaction
     |> cast(attrs, @cast_attrs)
     |> validate_required(@cast_attrs)
     |> validate_length(:buyer_cpf, is: 11)
+    # Negative -> Spending cashback
+    # Positive -> Recieving cashback
     |> validate_number(:value, not_equal_to: 0)
   end
 end
