@@ -9,6 +9,6 @@ defmodule Cashex.Rules.Read do
   Finds an Rule from an id (uuid)
   """
   def call(rule_id) do
-    Repo.one(Rule, id: rule_id)
+    Repo.get_by(Rule, id: rule_id)
   end
 end
