@@ -6,6 +6,6 @@ defmodule Cashex.Transactions.Read do
   alias Cashex.{Transaction, Repo}
 
   def call(transaction_id) do
-    Repo.one(Transaction, id: transaction_id)
+    Repo.get_by(Transaction, id: transaction_id)
   end
 end
