@@ -7,6 +7,14 @@ defmodule CashexWeb.Router do
 
   scope "/api", CashexWeb do
     pipe_through :api
+
+    resources "/rule", RuleController, only: [:show, :create, :delete, :update]
+    get "/rule/searchdesc", RuleController, :search
+
+    # resources "/transaction", TransactionController, only: [:show, :create]
+
+    # get "/buyer/:id", BuyerController, :show
+    # get "/buyer/spend", BuyerController, :spend
   end
 
   # Enables LiveDashboard only for development

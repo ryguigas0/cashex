@@ -1,5 +1,4 @@
 defmodule Cashex.Rules.Create do
-
   @moduledoc """
   Rule creating related functions
   """
@@ -9,7 +8,7 @@ defmodule Cashex.Rules.Create do
   @doc """
   Creates an Rule from a description and bonus (percentage)
   """
-  def call(attrs = %{desc: _desc, bon: _bon}) when is_map(attrs) do
+  def call(attrs = %{desc: _desc, bon: _bon}) do
     %Rule{}
     |> Rule.changeset(attrs)
     |> Repo.insert()

@@ -8,7 +8,7 @@ defmodule Cashex.Rules.Update do
   @doc """
   Updates an Rule with another description or bonus (percentage)
   """
-  def call(new_attrs, rule_id) when is_map(new_attrs) do
+  def call(new_attrs = %{desc: _desc, bon: _bon}, rule_id) do
     Rules.Read.call(rule_id)
     |> Rule.changeset(new_attrs)
     |> Repo.update()
