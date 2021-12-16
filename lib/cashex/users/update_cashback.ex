@@ -11,12 +11,13 @@ defmodule Cashex.Users.UpdateCashback do
 
   defp find_user(cpf) do
     # Finds an user with the cpf
-    Users.Read.call(cpf)
+    cpf
+    |> Users.Read.call()
     |> handle_user(cpf)
   end
 
   # Runs when there is no user with the same cpf
-  defp handle_user(nil, cpf) do
+  defp handle_user({:error, :search_no_results}, cpf) do
     case Users.Create.call(cpf) do
       # invalid cpf
       {:error, _} = err -> err
@@ -29,7 +30,7 @@ defmodule Cashex.Users.UpdateCashback do
   defp handle_user(user, _cpf), do: user
 
   # Updates the accumulated cashback from the user
-  defp update_cashback_acc(user, cashback_value) do
+  defp update_cashback_acc({:ok, user}, cashback_value) do
     user
     |> User.changeset(%{cashback_acc: user.cashback_acc + cashback_value})
     |> Repo.update()

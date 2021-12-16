@@ -11,10 +11,11 @@ defmodule CashexWeb.Router do
     get "/rule/search", RuleController, :search
     resources "/rule", RuleController, only: [:show, :create, :delete, :update]
 
-    get "/transaction/history/:cpf", TransactionController, :history
+    get "/transaction/history/:cpf/", TransactionController, :history
     resources "/transaction", TransactionController, only: [:show, :create]
 
-    get "/user/:cpf", UserController, :show
+    # TODO: make this route recieve an empty cpf and fallback
+    get "/user/", UserController, :show
     get "/user/:cpf/spend", UserController, :spend
   end
 

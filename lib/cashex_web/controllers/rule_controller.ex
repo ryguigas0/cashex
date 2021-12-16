@@ -3,6 +3,8 @@ defmodule CashexWeb.RuleController do
 
   alias Cashex.Rules
 
+  action_fallback CashexWeb.ErrorFallbackController
+
   def create(conn, params) do
     attrs =
       %{}
@@ -19,8 +21,7 @@ defmodule CashexWeb.RuleController do
   def show(conn, params) do
     rule_id = params["id"]
 
-    with rule <- Rules.Read.call(rule_id),
-         false <- is_nil(rule) do
+    with {:ok, rule} <- Rules.Read.call(rule_id) do
       conn
       |> put_status(:found)
       |> render("show.json", rule: rule)
@@ -53,15 +54,13 @@ defmodule CashexWeb.RuleController do
   end
 
   def search(conn, params) do
+    desc = Map.get(params, "desc", "")
 
-    result =
-      Map.get(params, "desc", "")
-      |> Rules.SerchByDesc.call()
-
-    with true <- length(result) != 0 do
+    with {:ok, rules} <-
+           Rules.SerchByDesc.call(desc) do
       conn
       |> put_status(:found)
-      |> render("show_many.json", rule_list: result)
+      |> render("show_many.json", rule_list: rules)
     end
   end
 end

@@ -29,6 +29,6 @@ defmodule Cashex.Transaction do
     |> validate_length(:user_cpf, is: 11)
     # Negative -> Spending cashback
     # Positive -> Recieving cashback
-    |> validate_number(:value, not_equal_to: 0)
+    |> validate_number(:value, greater_than: 0)
   end
 end

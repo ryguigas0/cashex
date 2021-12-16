@@ -12,5 +12,9 @@ defmodule Cashex.Rules.Create do
     %Rule{}
     |> Rule.changeset(attrs)
     |> Repo.insert()
+    |> case do
+      {:error, changeset} -> {:error, {:invalid_changeset, changeset}}
+      {:ok, rule} ->  {:ok, rule}
+    end
   end
 end

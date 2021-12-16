@@ -9,5 +9,9 @@ defmodule Cashex.Users.Create do
     %User{}
     |> User.changeset(%{cpf: cpf})
     |> Repo.insert()
+    |> case do
+      {:error, changeset} -> {:error, {:invalid_changeset, changeset}}
+      {:ok, user} ->  {:ok, user}
+    end
   end
 end

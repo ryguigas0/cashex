@@ -3,6 +3,8 @@ defmodule CashexWeb.TransactionController do
 
   alias Cashex.Transactions
 
+  action_fallback CashexWeb.ErrorFallbackController
+
   def create(conn, params) do
     attrs =
       %{}
@@ -20,8 +22,7 @@ defmodule CashexWeb.TransactionController do
   def show(conn, params) do
     transaction_id = params["id"]
 
-    with transaction <- Transactions.Read.call(transaction_id),
-         false <- is_nil(transaction) do
+    with {:ok, transaction} <- Transactions.Read.call(transaction_id) do
       conn
       |> put_status(:found)
       |> render("show.json", transaction: transaction)
@@ -29,10 +30,10 @@ defmodule CashexWeb.TransactionController do
   end
 
   def history(conn, params) do
-    with user_cpf <- params["cpf"],
-         false <- is_nil(user_cpf),
-         history <- Transactions.History.call(user_cpf),
-         true <- length(history) != 0 do
+    user_cpf = Map.get(params, "cpf", {:error, :no_cpf_sent})
+
+    with {:ok, history} <-
+           Transactions.History.call(user_cpf) do
       conn
       |> put_status(:found)
       |> render("show_many.json", %{transaction_list: history})

@@ -15,10 +15,10 @@ defmodule Cashex.Transactions.Create do
   # Calculates the cashback with the bonus, in case theres a rule
   defp get_cashback(rule_id, value) do
     case Rules.Read.call(rule_id) do
-      nil ->
-        {:error, :rule_not_found}
+      {:error, reason} ->
+        {:error, reason}
 
-      rule ->
+      {:ok, rule} ->
         rule.bon / 100 * value
     end
   end

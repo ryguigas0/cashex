@@ -10,6 +10,13 @@ defmodule Cashex.Rules.Delete do
   """
   def call(rule_id) do
     Rules.Read.call(rule_id)
-    |> Repo.delete()
+    |> case do
+      {:ok, rule} ->
+        rule
+        |> Repo.delete()
+
+      {:error, _} = errors ->
+        errors
+    end
   end
 end
