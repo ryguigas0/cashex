@@ -1,9 +1,16 @@
 # Cashex
 Elixir powered cashback manager
 
-To start your Cashex server:
+## Requirements
+- Elixir 1.12 or above
+- Erlang 22.3 or above
+- Phoenix 1.6.2 or above
+- Postgresql
+- Postman (for the tests provided below)
 
-1. Install dependencies with `mix deps.get`
-2.  Create and migrate your database with `mix ecto.setup`
-3.  Start Phoenix endpoint with `mix phx.server` or inside IEx with `iex -S mix phx.server`
-4. Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+## To start your development workspace:
+1. Install dependencies, create and migrate your databse with `mix setup`
+2. Download the (test requests)[https://gist.github.com/ryguigas0/85bab8d28a0e7658ffe927e938e670ae#file-cashex-postman_collection]
+3. Import the requests into postman
+4.  Start Phoenix server with `mix phx.server` or inside IEx with `iex -S mix phx.server`
+5.  Run the collection
