@@ -10,7 +10,7 @@ Elixir powered cashback manager
 
 ## To start your development workspace:
 1. Install dependencies, create and migrate your databse with `mix setup`
-2. Download the (test requests)[https://gist.github.com/ryguigas0/85bab8d28a0e7658ffe927e938e670ae#file-cashex-postman_collection]
+2. Download the [test requests](https://gist.github.com/ryguigas0/85bab8d28a0e7658ffe927e938e670ae#file-cashex-postman_collection)
 3. Import the requests into postman
 4.  Start Phoenix server with `mix phx.server` or inside IEx with `iex -S mix phx.server`
 5.  Run the collection
