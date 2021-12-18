@@ -1,4 +1,7 @@
 defmodule Cashex.Repo.Migrations.CreateTransactions do
+  @moduledoc """
+  Transaction Ecto migration
+  """
   use Ecto.Migration
 
   def change do
@@ -7,6 +10,8 @@ defmodule Cashex.Repo.Migrations.CreateTransactions do
       add :cashback, :float
       add :value, :float
       add :user_cpf, :string
+      # recieve / spend
+      add :type, :string
 
       timestamps()
     end

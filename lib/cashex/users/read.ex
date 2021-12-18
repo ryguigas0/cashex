@@ -9,7 +9,7 @@ defmodule Cashex.Users.Read do
   def call(cpf) do
     Repo.get_by(User, cpf: cpf)
     |> case do
-      nil -> {:error, :search_no_results}
+      nil -> {:error, :user_not_found}
       user -> {:ok, user}
     end
   end

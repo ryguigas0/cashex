@@ -13,12 +13,13 @@ defmodule CashexWeb.ErrorView do
   # the template name. For example, "404.json" becomes
   # "Not Found".
 
-  def render("bad_changeset.json", %{changeset: changeset}), do: %{errors: translate_errors(changeset)}
+  def render("bad_changeset.json", %{changeset: changeset}),
+    do: %{errors: translate_errors(changeset)}
+
   def render("error_msg.json", %{message: msg}), do: %{errors: msg}
 
-  # def template_not_found(template, _assigns) do
-  #   %{errors: %{detail: Phoenix.Controller.status_message_from_template(template)}}
-  # end
+  def template_not_found(template, _assigns),
+    do: %{errors: Phoenix.Controller.status_message_from_template(template)}
 
   defp translate_errors(changeset) do
     Changeset.traverse_errors(changeset, fn {msg, opts} ->

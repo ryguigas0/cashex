@@ -8,7 +8,7 @@ defmodule Cashex.Transaction do
 
   @primary_key {:id, :binary_id, autogenerate: true}
 
-  @fields [:value, :user_cpf, :cashback]
+  @fields [:value, :user_cpf, :cashback, :type]
 
   # What to render in json
   @derive {Jason.Encoder, only: [:id] ++ @fields}
@@ -17,6 +17,7 @@ defmodule Cashex.Transaction do
     field :cashback, :float
     field :value, :float
     field :user_cpf, :string
+    field :type, :string
 
     timestamps()
   end
@@ -27,8 +28,7 @@ defmodule Cashex.Transaction do
     |> cast(attrs, @fields)
     |> validate_required(@fields)
     |> validate_length(:user_cpf, is: 11)
-    # Negative -> Spending cashback
-    # Positive -> Recieving cashback
     |> validate_number(:value, greater_than: 0)
+    |> validate_inclusion(:type, ~W(spend recieve))
   end
 end

@@ -11,8 +11,8 @@ defmodule CashexWeb.ErrorFallbackController do
     send_response(conn, :not_found, "error_msg.json", %{message: "Invalid data"})
   end
 
-  def call(conn, {:error, :search_no_results}) do
-    send_response(conn, :not_found, "error_msg.json", %{message: "Search yielded no results"})
+  def call(conn, {:error, :user_not_found}) do
+    send_response(conn, :not_found, "error_msg.json", %{message: "User not found"})
   end
 
   def call(conn, {:error, :cashback_not_float_value}) do

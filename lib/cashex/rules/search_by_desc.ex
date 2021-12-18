@@ -1,6 +1,6 @@
 defmodule Cashex.Rules.SerchByDesc do
   @moduledoc """
-  Rule searching by description
+  Searching rules with an description related functions
   """
 
   alias Cashex.{Repo, Rule}

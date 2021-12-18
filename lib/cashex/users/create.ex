@@ -11,7 +11,7 @@ defmodule Cashex.Users.Create do
     |> Repo.insert()
     |> case do
       {:error, changeset} -> {:error, {:invalid_changeset, changeset}}
-      {:ok, user} ->  {:ok, user}
+      {:ok, user} -> {:ok, user}
     end
   end
 end

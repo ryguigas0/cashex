@@ -12,11 +12,13 @@ defmodule CashexWeb.Router do
     resources "/rule", RuleController, only: [:show, :create, :delete, :update]
 
     get "/transaction/history/:cpf/", TransactionController, :history
-    resources "/transaction", TransactionController, only: [:show, :create]
+    resources "/transaction", TransactionController, only: [:show]
+    post "/transaction/recieve", TransactionController, :recieve
 
-    # TODO: make this route recieve an empty cpf and fallback
+    post "/transaction/spend/gen", LinkController, :gen_spend_link
+    get "/transaction/spend/:id", LinkController, :use_spend_link
+
     get "/user/", UserController, :show
-    get "/user/:cpf/spend", UserController, :spend
   end
 
   # Enables LiveDashboard only for development

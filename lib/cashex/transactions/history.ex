@@ -9,13 +9,6 @@ defmodule Cashex.Transactions.History do
   def call(user_cpf) do
     query = from t in Transaction, where: t.user_cpf == ^user_cpf
 
-    history =
-      Repo.all(query)
-
-    if history |> Enum.empty? do
-      {:error, :search_no_results}
-    else
-      {:ok, history}
-    end
+    Repo.all(query)
   end
 end

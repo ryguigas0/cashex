@@ -5,16 +5,25 @@ defmodule CashexWeb.TransactionController do
 
   action_fallback CashexWeb.ErrorFallbackController
 
-  def create(conn, params) do
-    attrs =
-      %{}
-      |> Map.put(:value, params["value"])
-      |> Map.put(:user_cpf, params["user_cpf"])
-      |> Map.put(:rule_id, params["rule_id"])
+  def recieve(conn, params) do
+    rule_id = params["rule_id"]
+    value = params["value"]
+    user_cpf = params["user_cpf"]
 
-    with {:ok, new_transaction} <- Transactions.Create.call(attrs) do
+    with {:ok, new_transaction} <- Transactions.Create.call("recieve", user_cpf, value, rule_id) do
       conn
       |> put_status(:created)
+      |> render("show.json", transaction: new_transaction)
+    end
+  end
+
+  def spend(conn, params) do
+    value = params["value"]
+    user_cpf = params["user_cpf"]
+
+    with {:ok, new_transaction} <- Transactions.Create.call("spend", user_cpf, value, nil) do
+      conn
+      |> put_status(:ok)
       |> render("show.json", transaction: new_transaction)
     end
   end
@@ -32,7 +41,7 @@ defmodule CashexWeb.TransactionController do
   def history(conn, params) do
     user_cpf = Map.get(params, "cpf", {:error, :no_cpf_sent})
 
-    with {:ok, history} <-
+    with history <-
            Transactions.History.call(user_cpf) do
       conn
       |> put_status(:found)

@@ -1,6 +1,6 @@
 defmodule Cashex.Rules.Delete do
   @moduledoc """
-  Rule updating related functions
+  Rule deleting related functions
   """
 
   alias Cashex.{Repo, Rules}
