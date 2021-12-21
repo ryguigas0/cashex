@@ -20,7 +20,7 @@ defmodule Cashex.Users.UpdateCashback do
   end
 
   # Runs when there is no user with the same cpf
-  defp handle_user({:ok, nil}, cpf) do
+  defp handle_user({:error, :user_not_found}, cpf) do
     case Users.Create.call(cpf) do
       # invalid cpf
       {:error, _} = err -> err

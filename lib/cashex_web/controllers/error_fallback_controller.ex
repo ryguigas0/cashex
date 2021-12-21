@@ -12,7 +12,11 @@ defmodule CashexWeb.ErrorFallbackController do
   end
 
   def call(conn, {:error, :user_not_found}) do
-    send_response(conn, :not_found, "error_msg.json", %{message: "User not found"})
+    send_response(conn, :ok, "error_msg.json", %{message: "User not found"})
+  end
+
+  def call(conn, {:error, :link_not_found}) do
+    send_response(conn, :ok, "error_msg.json", %{message: "Link not found"})
   end
 
   def call(conn, {:error, :cashback_not_float_value}) do
@@ -20,7 +24,9 @@ defmodule CashexWeb.ErrorFallbackController do
   end
 
   def call(conn, {:error, :cashback_0_value}) do
-    send_response(conn, :bad_request, "error_msg.json", %{message: "Cashback must be greater than 0.0"})
+    send_response(conn, :bad_request, "error_msg.json", %{
+      message: "Cashback must be greater than 0.0"
+    })
   end
 
   defp send_response(conn, status, template, assigns) do

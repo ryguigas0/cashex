@@ -12,7 +12,7 @@ defmodule CashexWeb.Router do
     resources "/rule", RuleController, only: [:show, :create, :delete, :update]
 
     get "/transaction/history/:cpf/", TransactionController, :history
-    resources "/transaction", TransactionController, only: [:show]
+    get "/transaction/:id", TransactionController, :show
     post "/transaction/recieve", TransactionController, :recieve
 
     post "/transaction/spend/gen", LinkController, :gen_spend_link

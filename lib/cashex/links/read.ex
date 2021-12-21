@@ -1,10 +1,14 @@
 defmodule Cashex.Links.Read do
-  alias Cashex.{Repo, Link}
+  @moduledoc """
+  Link reading related functions
+  """
+
+  alias Cashex.{Link, Repo}
 
   def call(link_id) do
     # Checks if its an valid uuid
     Regex.match?(
-      ~r(^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$),
+      ~r([0-9]{7}),
       link_id
     )
     |> handle_id(link_id)
@@ -14,7 +18,7 @@ defmodule Cashex.Links.Read do
     link = Repo.get_by(Link, id: link_id)
 
     case link do
-      nil -> {:error, :not_found}
+      nil -> {:error, :link_not_found}
       link -> {:ok, link}
     end
   end
